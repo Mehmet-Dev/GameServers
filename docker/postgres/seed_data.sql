@@ -1,27 +1,30 @@
--- seeding data
+-- Seeding data
+
 -- Users
 
-INSERT INTO "users" ("username", "password_hash", "role")
+INSERT INTO "users"
+    ("username", "password_hash", "role", "created_at", "updated_at")
 VALUES
-    ('admin', 'dummy_hash_admin', 1),
-    ('moderator', 'dummy_hash_mod', 2),
-    ('gamer', 'dummy_hash_gamer', 2);
+    ('moderator', 'dummy_hash_mod', 0, NOW() - INTERVAL '7 days', NOW() - INTERVAL '2 hours'),
+    ('admin', 'dummy_hash_admin', 1, NOW() - INTERVAL '5 days', NOW() - INTERVAL '1 day'),
+    ('superduperultraadmin', 'dummy_hash_superadmin', 2, NOW() - INTERVAL '2 days', NOW() - INTERVAL '3 hours');
 
 
 -- Game servers
 
 INSERT INTO "game_servers"
-    ("game_name", "server_size", "started_at", "status", "created_by")
+    ("game_name", "server_size", "started_at", "status", "created_by", "created_at", "updated_at")
 VALUES
-    ('Minecraft', 20, NOW() - INTERVAL '3 hours', 1, 1),
-    ('Terraria', 8, NOW() - INTERVAL '47 minutes', 1, 2),
-    ('Yakuza Kiwami', 4, NOW() - INTERVAL '12 minutes', 1, 1),
-    ('Nightreign', 3, NOW() - INTERVAL '2 hours', 1, 3);
+    ('Minecraft', 20, NOW() - INTERVAL '3 hours', 1, 1, NOW() - INTERVAL '3 hours', NOW() - INTERVAL '3 hours'),
+    ('Terraria', 8, NOW() - INTERVAL '47 minutes', 1, 2, NOW() - INTERVAL '47 minutes', NOW() - INTERVAL '20 minutes'),
+    ('Yakuza Kiwami', 4, NOW() - INTERVAL '12 minutes', 1, 1, NOW() - INTERVAL '12 minutes', NOW() - INTERVAL '10 minutes'),
+    ('Nightreign', 3, NOW() - INTERVAL '2 hours', 1, 3, NOW() - INTERVAL '2 hours', NOW() - INTERVAL '20 minutes');
 
 
 -- Server logs
 
-INSERT INTO "server_logs" ("server_id", "content", "created_at")
+INSERT INTO "server_logs"
+    ("server_id", "content", "created_at")
 VALUES
     (1, 'Minecraft server started successfully.', NOW() - INTERVAL '3 hours'),
     (1, 'A player tried to build a house entirely out of dirt. Administration is monitoring the situation.', NOW() - INTERVAL '2 hours'),
