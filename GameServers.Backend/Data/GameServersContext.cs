@@ -11,4 +11,9 @@ public class GameServersContext : DbContext
     public DbSet<ServerLog> ServerLogs { get; set; }
 
     public GameServersContext(DbContextOptions<GameServersContext> options) : base(options) {}
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>().HasQueryFilter(u => u.DeletedAt == null);
+    }
 }
